@@ -6,7 +6,8 @@ include 'config/conf.php';
             $pdo = new PDO(
                 'mysql:host=' . $confdb['host'] . ';dbname=' . $confdb['databasename'] . ';',
                 $confdb['login'],
-                $confdb['password']
+                $confdb['password'],
+                array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
             );
             $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
             $db = $pdo->query('SELECT * FROM test');
