@@ -1,12 +1,17 @@
 <?php
 class Conf{
-    static $debug = 1;
-    static $databases = array(
-        'default' => array(
+    static $databases = [
+        'default' => [
             'host'      =>'localhost',
             'databasename'  =>'',
             'login'     =>'',
             'password'  =>''
-        )
-    );
+        ],
+        'distrib' => [
+            'host'      =>'localhost',
+            'databasename'  =>'',
+            'login'     =>'',
+            'password'  =>''
+        ]
+    ];
 }
