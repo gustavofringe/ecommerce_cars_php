@@ -1,8 +1,6 @@
 <?php
 
-class Conf
-{
-    static $databases = [
+    $databases = [
         'default' => [
             'host' => 'localhost',
             'databasename' => '',
@@ -16,4 +14,3 @@ class Conf
             'password' => ''
         ],
     ];
-}

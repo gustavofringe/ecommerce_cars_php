@@ -1,24 +1,18 @@
 <?php
-
-class Db
-{
-    public $db;
-    public $conf = 'default';
-
-    public function __construct()
-    {
-        $conf = Conf::$databases[$this->conf];
+include 'config/conf.php';
+    $conf = 'default';
+    $confdb = $databases[$conf];
         try {
             $pdo = new PDO(
-                'mysql:host=' . $conf['host'] . ';dbname=' . $conf['databasename'] . ';',
-                $conf['login'],
-                $conf['password'],
-                [PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8']
+                'mysql:host=' . $confdb['host'] . ';dbname=' . $confdb['databasename'] . ';',
+                $confdb['login'],
+                $confdb['password']
             );
             $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-            $this->db = $pdo;
+            $db = $pdo->query('SELECT * FROM test');
+            $value = $db->fetchAll();
         } catch (PDOException $e) {
             die('Impossible de se connecter à la base de donnée');
         }
-    }
-}
+
+

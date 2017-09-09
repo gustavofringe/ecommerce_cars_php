@@ -1,11 +1,10 @@
 <?php
-class Conf{
-    static $databases = [
+    $databases = [
         'default' => [
             'host'      =>'localhost',
-            'databasename'  =>'',
-            'login'     =>'',
-            'password'  =>''
+            'databasename'  =>'test',
+            'login'     =>'root',
+            'password'  =>'ava210709'
         ],
         'distrib' => [
             'host'      =>'localhost',
@@ -14,4 +13,3 @@ class Conf{
             'password'  =>''
         ]
     ];
-}
