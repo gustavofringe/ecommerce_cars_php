@@ -10,8 +10,6 @@ include 'config/conf.php';
                 array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
             );
             $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-            $db = $pdo->query('SELECT * FROM test');
-            $value = $db->fetchAll();
         } catch (PDOException $e) {
             die('Impossible de se connecter à la base de donnée');
         }
