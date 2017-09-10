@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le :  sam. 09 sep. 2017 à 20:57
+-- Généré le :  Dim 10 sep. 2017 à 11:00
 -- Version du serveur :  10.1.26-MariaDB
 -- Version de PHP :  7.1.9
 
@@ -25,6 +25,25 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `admin`
+--
+
+CREATE TABLE `admin` (
+  `id` int(11) NOT NULL,
+  `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `admin`
+--
+
+INSERT INTO `admin` (`id`, `username`, `password`) VALUES
+(1, 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `test`
 --
 
@@ -42,14 +61,18 @@ CREATE TABLE `test` (
 --
 
 INSERT INTO `test` (`id`, `title`, `content`, `autor`, `image`, `created_at`) VALUES
-(3, 'nissan', '        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, ad aliquid iusto libero quibusdam voluptatem. Blanditiis, dolorem, quibusdam. Ad, dignissimos et ex necessitatibus nesciunt nihil praesentium veniam! Consectetur, dolores, illum?\r\n', 'guillaume', 'the-archer-1680x1050.jpg', '0000-00-00'),
-(4, 'nissan', '        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, ad aliquid iusto libero quibusdam voluptatem. Blanditiis, dolorem, quibusdam. Ad, dignissimos et ex necessitatibus nesciunt nihil praesentium veniam! Consectetur, dolores, illum?\r\n', 'guillaume', 'the-archer-1680x1050.jpg', '0000-00-00'),
-(5, 'peugot', '        &lt;p&gt;Lorem&lt;/p&gt; ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis, culpa deserunt earum error et fugit id in quia saepe. At excepturi facere fugit nesciunt odio officia quia recusandae sapiente voluptatum.\r\n', 'guillaume', 'the-archer-1680x1050.jpg', '0000-00-00'),
-(13, 'test4', '        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus assumenda consectetur illo magnam non nostrum quia quisquam repellendus sint, vel? Cum explicabo illo iure laborum, libero quaerat quisquam suscipit voluptates.\r\n', 'guillaume', 'hulk_8.gif', '2017-09-09');
+(13, 'test4', '        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus assumenda consectetur illo magnam non nostrum quia quisquam repellendus sint, vel? Cum explicabo illo iure laborum, libero quaerat quisquam suscipit voluptates.\r\n', 'guillaume', 'hulk_8.gif', '2017-09-09'),
+(16, 'nissan', 'new', 'new', 'the-archer-1680x1050.jpg', '2017-09-09');
 
 --
 -- Index pour les tables déchargées
 --
+
+--
+-- Index pour la table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `test`
@@ -62,10 +85,16 @@ ALTER TABLE `test`
 --
 
 --
+-- AUTO_INCREMENT pour la table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT pour la table `test`
 --
 ALTER TABLE `test`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
