@@ -1,6 +1,7 @@
 <?php
 include 'debug/debug.php';
 session_start();
+// if admin as login redirect admin.php
 if(isset($_SESSION['auth'])){
     header('Location: admin.php');
     die();
