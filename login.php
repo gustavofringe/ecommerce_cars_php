@@ -1,14 +1,17 @@
 <?php
+include 'debug/debug.php';
+session_start();
 if(isset($_SESSION['auth'])){
     header('Location: admin.php');
-    exit();
+    die();
 }
-if(!empty($_POST) && !empty($_POST['username']) && !empty($_POST['password'])){
+if(isset($_POST['username']) && isset($_POST['password'])){
     require_once 'db/db.php';
-    $req=$pdo->prepare('SELECT * FROM users WHERE (username = :username)');
-    $req->execute(['username' => $_POST['username']]);
+    $username = $pdo->quote($_POST['username']);
+    $password = sha1($_POST['password']);
+    $req = $pdo->query("SELECT * FROM admin WHERE username=$username AND password='$password'");
     $user = $req->fetch();
-    if(password_verify($_POST['password'], $user->password)){
+    if($password == $user->password){
         $_SESSION['auth'] = $user;
         $_SESSION['flash']['success'] = "Vous êtes maintenant connecté";
         header('Location: admin.php');

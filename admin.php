@@ -1,5 +1,7 @@
 <?php
 include 'db/db.php';
+include 'function/logged.php';
+logged_only();
 
 $db = $pdo->query('SELECT * FROM test');
 $value = $db->fetchAll();
@@ -27,6 +29,7 @@ $value = $db->fetchAll();
                     <td><?= $v->created_at; ?></td>
                     <td><img src="img/<?= $v->image; ?>" alt=""></td>
                     <td><a href="view.php?id=<?= $v->id; ?>">See more</a></td>
+                    <td><a href="delete.php?id=<?= $v->id; ?>">Delete</a></td>
                 </tr>
             <?php endforeach; ?>
         </table>
