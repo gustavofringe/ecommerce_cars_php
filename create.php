@@ -26,12 +26,12 @@ if (!empty($_POST)) {
             move_uploaded_file($img['tmp_name'], 'img/'.$img['name']);
             $file = 'img/'. $img['name'];
             $resizedFile =  'img/' . $filename;
-            Img::smart_resize_image($file , null, 75 , 75 , false , $resizedFile , false , false ,100 );
+            Img::smart_resize_image($file , null, 318 , 180 , true , $resizedFile , false , false ,100 );
         }else{
             $errors['image'] = "l'image n'est pas au bon format";
         }
         $req->execute([$_POST['title'], $content, $_POST['autor'], $img['name']]);
-        header('Location: index.php');
+        header('Location: admin.php');
         die();
     }
 }
@@ -68,8 +68,10 @@ include 'partials/header.php';
             <input type="text" class="form-control" id="autor" name="autor" placeholder="autor">
         </div>
         <div class="form-group">
-            <label for="exampleFormControlFile1">Example file input</label>
-            <input type="file" name="image" class="form-control-file" id="exampleFormControlFile1">
+            <label class="custom-file">
+                <input type="file" id="file" name="image" class="custom-file-input" required>
+                <span class="custom-file-control"></span>
+            </label>
         </div>
         <button class="btn btn-primary">Send</button>
     </form>

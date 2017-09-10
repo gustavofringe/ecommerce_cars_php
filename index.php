@@ -6,30 +6,22 @@ $value = $db->fetchAll();
 ?>
 <?php include 'partials/header.php'; ?>
     <div class="container">
-        <table class="table table-inverse">
+        <div class="row">
 
-            <tr>
-                <th>#</th>
-                <th>title</th>
-                <th>content</th>
-                <th>autor</th>
-                <th>created at</th>
-                <th>image</th>
-                <th>action</th>
-                <th>delete</th>
-            </tr>
             <?php foreach ($value as $k => $v): ?>
-                <tr>
-                    <td><?= $v->id; ?></td>
-                    <td><?= $v->title; ?></td>
-                    <td><?= $v->content; ?></td>
-                    <td><?= $v->autor; ?></td>
-                    <td><?= $v->created_at; ?></td>
-                    <td><img src="img/<?= $v->image; ?>" alt=""></td>
-                    <td><a href="view.php?id=<?= $v->id; ?>">See more</a></td>
-                </tr>
+                <div class="col-md-4">
+                    <div class="card" style="width: 20rem;">
+                        <img class="card-img-top" src="img/<?= $v->image; ?>" alt="<?= $v->title; ?>">
+                        <div class="card-body">
+                            <h4 class="card-title"><?= $v->title; ?></h4>
+                            <p class="card-text">Sold by: <?= $v->autor; ?></p>
+                            <a href="view.php?id=<?= $v->id; ?>" class="btn btn-primary">See more</a>
+                        </div>
+                    </div>
+                </div>
             <?php endforeach; ?>
-        </table>
+        </div>
+
     </div>
 
 <?php include 'partials/footer.php'; ?>

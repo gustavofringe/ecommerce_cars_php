@@ -8,8 +8,8 @@ $value = $db->fetchAll();
 ?>
 <?php include 'partials/header.php'; ?>
     <div class="container">
-        <table class="table table-inverse">
 
+        <table class="table table-inverse">
             <tr>
                 <th>#</th>
                 <th>title</th>
@@ -18,7 +18,6 @@ $value = $db->fetchAll();
                 <th>created at</th>
                 <th>image</th>
                 <th>action</th>
-                <th>delete</th>
             </tr>
             <?php foreach ($value as $k => $v): ?>
                 <tr>
@@ -28,8 +27,10 @@ $value = $db->fetchAll();
                     <td><?= $v->autor; ?></td>
                     <td><?= $v->created_at; ?></td>
                     <td><img src="img/<?= $v->image; ?>" alt=""></td>
-                    <td><a href="view.php?id=<?= $v->id; ?>">See more</a></td>
-                    <td><a href="delete.php?id=<?= $v->id; ?>">Delete</a></td>
+                    <td>
+                        <a class="btn btn-danger" href="delete.php?id=<?= $v->id; ?>">Delete</a>
+                        <a class="btn btn-info" href="edit.php?id=<?= $v->id; ?>">Edit</a>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </table>
