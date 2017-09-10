@@ -1,11 +1,13 @@
 <?php
 include 'debug/debug.php';
+include "function/logged.php";
+logged_only();
 if (!empty($_POST)) {
     require_once 'db/db.php';
     if (empty($_POST['title']) || !preg_match('/^[a-zA-Z0-9_]+$/', $_POST['title'])) {
         $errors['title'] = "Vous n'avez pas entrer un titre valide";
     }
-    if(empty($_POST['content'])){
+    if(empty($_POST['content']) || !preg_match('/^[a-zA-Z0-9_]+$/', $_POST['content'])){
         $errors['content'] = "Vous devez ecrire qqe chose";
     }
     if (empty($_POST['autor']) || !preg_match('/^[a-zA-Z0-9_]+$/', $_POST['autor'])) {
@@ -14,11 +16,17 @@ if (!empty($_POST)) {
     if(empty($errors)){
         $req=$pdo->prepare("INSERT INTO test SET title = ?, content = ?, autor = ?, image = ?, created_at = NOW()");
         $content = htmlspecialchars($_POST['content']);
+        require 'function/resize.php';
         $img = $_FILES['image'];
+
         $ext = strtolower(substr($img['name'], -3));
         $auto_ext = ['jpg', 'png', 'gif', 'svg'];
         if(in_array($ext, $auto_ext)){
+            $filename = $img['name'];
             move_uploaded_file($img['tmp_name'], 'img/'.$img['name']);
+            $file = 'img/'. $img['name'];
+            $resizedFile =  'img/' . $filename;
+            Img::smart_resize_image($file , null, 75 , 75 , false , $resizedFile , false , false ,100 );
         }else{
             $errors['image'] = "l'image n'est pas au bon format";
         }

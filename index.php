@@ -16,6 +16,7 @@ $value = $db->fetchAll();
                 <th>created at</th>
                 <th>image</th>
                 <th>action</th>
+                <th>delete</th>
             </tr>
             <?php foreach ($value as $k => $v): ?>
                 <tr>
@@ -24,8 +25,9 @@ $value = $db->fetchAll();
                     <td><?= $v->content; ?></td>
                     <td><?= $v->autor; ?></td>
                     <td><?= $v->created_at; ?></td>
-                    <td><img src="img/<?= $v->image; ?>" alt="" style="height: 75px; width: 75px"></td>
+                    <td><img src="img/<?= $v->image; ?>" alt=""></td>
                     <td><a href="view.php?id=<?= $v->id; ?>">See more</a></td>
+                    <td><a href="delete.php?id=<?= $v->id; ?>">Delete</a></td>
                 </tr>
             <?php endforeach; ?>
         </table>
