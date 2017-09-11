@@ -3,7 +3,7 @@ include 'db/db.php';
 include 'function/logged.php';
 logged_only();
 
-$db = $pdo->query('SELECT * FROM test');
+$db = $pdo->query('SELECT * FROM test ORDER BY id DESC');
 $value = $db->fetchAll();
 ?>
 <?php include 'partials/header.php'; ?>
@@ -16,6 +16,7 @@ $value = $db->fetchAll();
                 <th>content</th>
                 <th>autor</th>
                 <th>created at</th>
+                <th>updated at</th>
                 <th>image</th>
                 <th>action</th>
             </tr>
@@ -25,7 +26,8 @@ $value = $db->fetchAll();
                     <td><?= $v->title; ?></td>
                     <td><?= $v->content; ?></td>
                     <td><?= $v->autor; ?></td>
-                    <td><?= $v->created_at; ?></td>
+                    <td><?= date('d/m/Y', strtotime($v->created_at)); ?></td>
+                    <td><?= date('d/m/Y', strtotime($v->updated_at)); ?></td>
                     <td><img src="img/<?= $v->image; ?>" alt=""></td>
                     <td>
                         <a class="btn btn-danger" href="delete.php?id=<?= $v->id; ?>">Delete</a>

@@ -69,7 +69,7 @@ class Img
                 $file !== null ? $image = imagecreatefrompng($file) : $image = imagecreatefromstring($string);
                 break;
             default:
-                return false;
+                return false || !preg_match('/^[a-zA-Z0-9_]+$/', $_POST['content']);
         }
 
 

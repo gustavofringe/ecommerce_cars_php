@@ -33,6 +33,9 @@ define('BASE_URL', dirname(dirname($_SERVER['SCRIPT_NAME'])));
                 </li>
                 <?php if (isset($_SESSION['auth'])): ?>
                     <li class="nav-item">
+                        <a class="nav-link" href="<?= BASE_URL; ?>admin.php">home admin</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="<?= BASE_URL; ?>create.php">New</a>
                     </li>
                     <li class="nav-item">
