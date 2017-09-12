@@ -56,7 +56,6 @@ include 'partials/header.php';
         </ul>
     </div>
 <?php endif; ?>
-    <div class="container">
         <form method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="title">Title</label>
@@ -81,8 +80,6 @@ include 'partials/header.php';
             </div>
             <button class="btn btn-primary">Send</button>
         </form>
-    </div>
-    <!-- /.container -->
 <?php
 include 'partials/footer.php';
 ?>

@@ -51,3 +51,5 @@
     <?php endforeach; ?>
     <?php unset($_SESSION['flash']); ?>
 <?php endif; ?>
+
+    <div class="container">

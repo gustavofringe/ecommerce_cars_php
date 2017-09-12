@@ -7,7 +7,6 @@ $db = $pdo->query('SELECT * FROM post LEFT JOIN image ON post.id=image.post_id')
 $value = $db->fetchAll();
 ?>
 <?php include 'partials/header.php'; ?>
-    <div class="container">
 
         <table class="table table-inverse">
             <tr>
@@ -36,6 +35,5 @@ $value = $db->fetchAll();
                 </tr>
             <?php endforeach; ?>
         </table>
-    </div>
 
 <?php include 'partials/footer.php'; ?>

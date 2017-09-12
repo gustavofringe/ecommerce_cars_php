@@ -6,7 +6,6 @@ $db = $pdo->query('SELECT * FROM post LEFT JOIN image ON post.id=image.post_id')
 $value = $db->fetchAll();
 ?>
 <?php include 'partials/header.php'; ?>
-    <div class="container">
         <div class="row">
 
             <?php foreach ($value as $k => $v): ?>
@@ -22,7 +21,5 @@ $value = $db->fetchAll();
                 </div>
             <?php endforeach; ?>
         </div>
-
-    </div>
 
 <?php include 'partials/footer.php'; ?>
