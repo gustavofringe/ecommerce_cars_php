@@ -1,6 +1,5 @@
 <?php
-include 'debug/debug.php';
-include "function/logged.php";
+include 'library/includes.php';
 logged_only();
 if (!empty($_POST)) {
     require_once 'db/db.php';
@@ -14,11 +13,14 @@ if (!empty($_POST)) {
         $errors['autor'] = "Vous n'avez pas entrer un auteur valide";
     }
     if(empty($errors)){
-        $content = $_POST['content'];
-        require 'function/resize.php';
+        $title = $pdo->quote($_POST['title']);
+        $content = $pdo->quote($_POST['content']);
+        $autor = $pdo->quote($_POST['autor']);
+        $pdo->query("INSERT INTO post SET title=$title, content=$content, autor=$autor, created_at=NOW()");
+        $post_id = $pdo->lastInsertId();
         $img = $_FILES['image'];
-        $size = $img['size'];
-        $type = $img['type'];
+        $size = $pdo->quote($img['size']);
+        $type = $pdo->quote($img['type']);
         $ext = strtolower(substr($img['name'], -3));
         $auto_ext = ['jpg', 'png', 'gif', 'svg'];
         if(in_array($ext, $auto_ext)){
@@ -27,20 +29,13 @@ if (!empty($_POST)) {
             $file = 'img/'. $img['name'];
             $resizedFile =  'img/' . $filename;
             Img::smart_resize_image($file , null, 318 , 180 , false , $resizedFile , false , false ,100 );
+            $pdo->query("INSERT INTO image SET name='$filename', size=$size, type=$type, post_id=$post_id");
         }else{
             $errors['image'] = "l'image n'est pas au bon format";
         }
-        $title = $_POST['title'];
-        $autor = $_POST['autor'];
-        $sql = "START TRANSACTION;
-                    INSERT INTO post (title, content, autor, created_at) VALUES ('$title', '$content', '$autor', 'NOW()');
-                    INSERT INTO image (name, size, type, post_id) VALUES ('$filename', '$size', '$type', 'post.id');
-                COMMIT;";
-        $req = $pdo->prepare($sql);
-
-        $req->execute();
-        //header('Location: admin.php');
-        //die();
+        $_SESSION['flash']['success'] = "Votre post est envoyé";
+        header('Location: admin.php');
+        die();
     }
 }
 ?>

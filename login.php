@@ -1,5 +1,5 @@
 <?php
-include 'debug/debug.php';
+include 'library/includes.php';
 session_start();
 // if admin as login redirect admin.php
 if(isset($_SESSION['auth'])){

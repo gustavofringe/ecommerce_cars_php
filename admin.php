@@ -1,9 +1,9 @@
 <?php
 include 'db/db.php';
-include 'function/logged.php';
+include 'library/includes.php';
 logged_only();
 
-$db = $pdo->query('SELECT * FROM post ORDER BY id DESC');
+$db = $pdo->query('SELECT * FROM post LEFT JOIN image ON post.id=image.post_id');
 $value = $db->fetchAll();
 ?>
 <?php include 'partials/header.php'; ?>
@@ -28,10 +28,10 @@ $value = $db->fetchAll();
                     <td><?= $v->autor; ?></td>
                     <td><?= date('d/m/Y', strtotime($v->created_at)); ?></td>
                     <td><?= date('d/m/Y', strtotime($v->updated_at)); ?></td>
-                    <td><img src="img/<?= $v->image; ?>" alt=""></td>
+                    <td><img src="img/<?= $v->name; ?>" alt=""></td>
                     <td>
-                        <a class="btn btn-danger" href="delete.php?id=<?= $v->id; ?>">Delete</a>
-                        <a class="btn btn-info" href="edit.php?id=<?= $v->id; ?>">Edit</a>
+                        <a class="btn btn-danger" href="delete.php?id=<?= $v->post_id; ?>">Delete</a>
+                        <a class="btn btn-info" href="edit.php?title=<?= $v->title; ?>">Edit</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

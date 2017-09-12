@@ -1,7 +1,4 @@
-<?php
-define('BASE_URL', dirname(dirname($_SERVER['SCRIPT_NAME'])));
-?>
-    <!doctype html>
+<!doctype html>
     <html class="no-js" lang="">
     <head>
         <meta charset="utf-8">
