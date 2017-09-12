@@ -3,7 +3,7 @@ include 'db/db.php';
 include 'function/logged.php';
 logged_only();
 
-$db = $pdo->query('SELECT * FROM test ORDER BY id DESC');
+$db = $pdo->query('SELECT * FROM post ORDER BY id DESC');
 $value = $db->fetchAll();
 ?>
 <?php include 'partials/header.php'; ?>

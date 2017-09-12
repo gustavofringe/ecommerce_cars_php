@@ -14,11 +14,11 @@ if (!empty($_POST)) {
         $errors['autor'] = "Vous n'avez pas entrer un auteur valide";
     }
     if(empty($errors)){
-        $req=$pdo->prepare("INSERT INTO test SET title = ?, content = ?, autor = ?, image = ?, created_at = NOW()");
         $content = $_POST['content'];
         require 'function/resize.php';
         $img = $_FILES['image'];
-
+        $size = $img['size'];
+        $type = $img['type'];
         $ext = strtolower(substr($img['name'], -3));
         $auto_ext = ['jpg', 'png', 'gif', 'svg'];
         if(in_array($ext, $auto_ext)){
@@ -30,9 +30,17 @@ if (!empty($_POST)) {
         }else{
             $errors['image'] = "l'image n'est pas au bon format";
         }
-        $req->execute([$_POST['title'], $content, $_POST['autor'], $img['name']]);
-        header('Location: admin.php');
-        die();
+        $title = $_POST['title'];
+        $autor = $_POST['autor'];
+        $sql = "START TRANSACTION;
+                    INSERT INTO post (title, content, autor, created_at) VALUES ('$title', '$content', '$autor', 'NOW()');
+                    INSERT INTO image (name, size, type, post_id) VALUES ('$filename', '$size', '$type', 'post.id');
+                COMMIT;";
+        $req = $pdo->prepare($sql);
+
+        $req->execute();
+        //header('Location: admin.php');
+        //die();
     }
 }
 ?>

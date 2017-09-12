@@ -1,7 +1,7 @@
 <?php
 include 'db/db.php';
 include 'debug/debug.php';
-$db = $pdo->query('SELECT * FROM test WHERE id='.$pdo->quote($_GET['id'], PDO::PARAM_STR));
+$db = $pdo->query('SELECT * FROM post WHERE id='.$pdo->quote($_GET['id'], PDO::PARAM_STR));
 $new = $db->fetch();
 ?>
 <?php include 'partials/header.php'; ?>
