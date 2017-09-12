@@ -9,7 +9,7 @@ if(!empty($_POST)){
     $title = $_POST['title'];
     $content = $_POST['content'];
     $autor = $_POST['autor'];
-    $update = $pdo->prepare("UPDATE post SET title = '$title', content = '$content', autor = '$autor', updated_at = NOW() WHERE id=".$pdo->quote($_GET['id'], PDO::PARAM_STR));
+    $update = $pdo->prepare("UPDATE post SET title='$title', content='$content', autor='$autor', updated_at=NOW() WHERE title=".$pdo->quote($_GET['title'], PDO::PARAM_STR));
     $update->execute();
     $_SESSION['flash']['success'] = "Votre article est mis a jour";
     header('Location: admin.php');
