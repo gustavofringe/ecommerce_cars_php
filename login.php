@@ -8,9 +8,9 @@ if(isset($_SESSION['auth'])){
 }
 if(isset($_POST['username']) && isset($_POST['password'])){
     require_once 'db/db.php';
-    $username = $pdo->quote($_POST['username']);
+    $username = $pdo->quote($_POST['username'], PDO::PARAM_STR);
     $password = sha1($_POST['password']);
-    $req = $pdo->query("SELECT * FROM admin WHERE username=$username AND password='$password'");
+    $req = $pdo->query("SELECT * FROM admin WHERE username= $username AND password= '$password'");
     $user = $req->fetch();
     if($password == $user->password){
         $_SESSION['auth'] = $user;

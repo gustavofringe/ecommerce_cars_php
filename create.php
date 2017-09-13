@@ -13,10 +13,11 @@ if (!empty($_POST)) {
         $errors['autor'] = "Vous n'avez pas entrer un auteur valide";
     }
     if(empty($errors)){
-        $title = $pdo->quote($_POST['title']);
-        $content = $pdo->quote($_POST['content']);
-        $autor = $pdo->quote($_POST['autor']);
-        $pdo->query("INSERT INTO post SET title=$title, content=$content, autor=$autor, created_at=NOW()");
+        $title = $pdo->quote($_POST['title'], PDO::PARAM_STR);
+        $content = $pdo->quote($_POST['content'], PDO::PARAM_STR);
+        $autor = $pdo->quote($_POST['autor'], PDO::PARAM_STR);
+        $req = $pdo->prepare("INSERT INTO post SET title= ?, content= ?, autor= ?, created_at=NOW()");
+        $req->execute([$title, $content, $autor]);
         $post_id = $pdo->lastInsertId();
         $img = $_FILES['image'];
         $size = $pdo->quote($img['size']);
@@ -29,7 +30,8 @@ if (!empty($_POST)) {
             $file = 'img/'. $img['name'];
             $resizedFile =  'img/' . $filename;
             Img::smart_resize_image($file , null, 318 , 180 , false , $resizedFile , false , false ,100 );
-            $pdo->query("INSERT INTO image SET name='$filename', size=$size, type=$type, post_id=$post_id");
+            $img = $pdo->prepare("INSERT INTO image SET name= ?, size= ?, type= ?, post_id= ?");
+            $img->execute([$pdo->quote($filename), $size, $type, $post_id]);
         }else{
             $errors['image'] = "l'image n'est pas au bon format";
         }
