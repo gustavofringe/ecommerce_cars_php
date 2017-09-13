@@ -3,12 +3,12 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title></title>
+        <title><?= $title_page; ?></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- Place favicon.ico in the root directory -->
-
+        <link rel="icon" href="<?= BASE_URL; ?>favicon.ico">
         <link rel="stylesheet" href="<?= BASE_URL; ?>css/normalize.css">
         <link rel="stylesheet" href="<?= BASE_URL; ?>css/main.css">
         <link rel="stylesheet" href="<?= BASE_URL; ?>css/bootstrap.min.css">
@@ -30,13 +30,13 @@
                 </li>
                 <?php if (isset($_SESSION['auth'])): ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= BASE_URL; ?>admin.php">home admin</a>
+                        <a class="nav-link" href="<?= BASE_URL; ?>admin/admin.php">home admin</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= BASE_URL; ?>create.php">New</a>
+                        <a class="nav-link" href="<?= BASE_URL; ?>admin/create.php">New</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= BASE_URL; ?>logout.php">Exit</a>
+                        <a class="nav-link" href="<?= BASE_URL; ?>admin/logout.php">Exit</a>
                     </li>
                 <?php endif; ?>
             </ul>

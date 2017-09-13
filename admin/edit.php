@@ -1,15 +1,14 @@
 <?php
-include 'db/db.php';
-include 'class/Form.php';
-include 'library/includes.php';
+include '../class/Form.php';
+include '../library/includes.php';
 logged_only();
 $db = $pdo->query('SELECT * FROM post WHERE title='.$pdo->quote($_GET['title'], PDO::PARAM_STR));
 $new = $db->fetch();
 if(!empty($_POST)){
-    $title = $pdo->quote($_POST['title'], PDO::PARAM_STR);
-    $content = $pdo->quote($_POST['content'], PDO::PARAM_STR);
-    $autor = $pdo->quote($_POST['autor'], PDO::PARAM_STR);
-    $get_title = $pdo->quote($_GET['title'], PDO::PARAM_STR);
+    $title = $_POST['title'];
+    $content = $_POST['content'];
+    $autor = $_POST['autor'];
+    $get_title = $_GET['title'];
     $update = $pdo->prepare("UPDATE post SET title= ?, content= ?, autor= ?, updated_at=NOW() WHERE title= ?");
     $update->execute([$title, $content, $autor, $get_title]);
     $_SESSION['flash']['success'] = "Votre article est mis a jour";
@@ -17,7 +16,7 @@ if(!empty($_POST)){
     die();
 }
 ?>
-<?php include 'partials/header.php'; ?>
+<?php include '../partials/header.php'; ?>
 <?php
 Form::open('post');
 Form::input('title', 'form-class-label', 'Title', 'text', 'title', 'form-control', $new->title, 'title');
@@ -37,4 +36,4 @@ Form::button('btn btn-primary', 'Update');
 Form::close();
 ?>
 
-<?php include 'partials/footer.php'; ?>
+<?php include '../partials/footer.php'; ?>

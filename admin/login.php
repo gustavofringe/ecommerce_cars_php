@@ -1,13 +1,13 @@
 <?php
-include 'library/includes.php';
+include '../library/includes.php';
 session_start();
+$title_page = "Se connecter";
 // if admin as login redirect admin.php
 if(isset($_SESSION['auth'])){
     header('Location: admin.php');
     die();
 }
 if(isset($_POST['username']) && isset($_POST['password'])){
-    require_once 'db/db.php';
     $username = $pdo->quote($_POST['username'], PDO::PARAM_STR);
     $password = sha1($_POST['password']);
     $req = $pdo->query("SELECT * FROM admin WHERE username= $username AND password= '$password'");
@@ -22,7 +22,7 @@ if(isset($_POST['username']) && isset($_POST['password'])){
     }
 }
 ?>
-<?php require 'partials/header.php'; ?>
+<?php require '../partials/header.php'; ?>
 
     <h1>Se connecter</h1>
 
@@ -38,4 +38,4 @@ if(isset($_POST['username']) && isset($_POST['password'])){
         <button class="btn btn-primary">Se connecter</button>
     </form>
 
-<?php require 'partials/footer.php'; ?>
+<?php require '../partials/footer.php'; ?>

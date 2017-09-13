@@ -1,7 +1,9 @@
 <?php
-include 'db/db.php';
+//import library
 include 'library/includes.php';
-
+//title page
+$title_page = "Accueil";
+//request for view all cars
 $db = $pdo->query('SELECT * FROM post LEFT JOIN image ON post.id=image.post_id');
 $value = $db->fetchAll();
 ?>

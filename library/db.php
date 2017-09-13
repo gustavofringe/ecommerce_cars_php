@@ -1,5 +1,4 @@
 <?php
-include 'config/conf.php';
     $conf = 'default';
     $confdb = $databases[$conf];
         try {

@@ -16,16 +16,12 @@ class Img
 
         if ($height <= 0 && $width <= 0) return false;
         if ($file === null && $string === null) return false;
-
-# Setting defaults and meta
         $info = $file !== null ? getimagesize($file) : getimagesizefromstring($string);
         $image = '';
         $final_width = 0;
         $final_height = 0;
         list($width_old, $height_old) = $info;
         $cropHeight = $cropWidth = 0;
-
-# Calculating proportionality
         if ($proportional) {
             if ($width == 0) $factor = $height / $height_old;
             elseif ($height == 0) $factor = $width / $width_old;
@@ -43,8 +39,6 @@ class Img
             $cropWidth = ($width_old - $width * $x) / 2;
             $cropHeight = ($height_old - $height * $x) / 2;
         }
-
-# Loading image to memory according to type
         switch ($info[2]) {
             case IMAGETYPE_JPEG:
                 $file !== null ? $image = imagecreatefromjpeg($file) : $image = imagecreatefromstring($string);
@@ -59,8 +53,6 @@ class Img
                 return false || !preg_match('/^[a-zA-Z0-9_]+$/', $_POST['content']);
         }
 
-
-# This is the resizing/resampling/transparency-preserving magic
         $image_resized = imagecreatetruecolor($final_width, $final_height);
         if (($info[2] == IMAGETYPE_GIF) || ($info[2] == IMAGETYPE_PNG)) {
             $transparency = imagecolortransparent($image);
@@ -81,13 +73,11 @@ class Img
         imagecopyresampled($image_resized, $image, 0, 0, $cropWidth, $cropHeight, $final_width, $final_height, $width_old - 2 * $cropWidth, $height_old - 2 * $cropHeight);
 
 
-# Taking care of original, if needed
         if ($delete_original) {
             if ($use_linux_commands) exec('rm ' . $file);
             else @unlink($file);
         }
 
-# Preparing a method of providing result
         switch (strtolower($output)) {
             case 'browser':
                 $mime = image_type_to_mime_type($info[2]);
@@ -104,7 +94,6 @@ class Img
                 break;
         }
 
-# Writing image according to type to the output destination and image quality
         switch ($info[2]) {
             case IMAGETYPE_GIF:
                 imagegif($image_resized, $output);
