@@ -6,6 +6,7 @@ $title_page = "Accueil";
 //request for view all cars
 $db = $pdo->query('SELECT * FROM post LEFT JOIN image ON post.id=image.post_id');
 $value = $db->fetchAll();
+dd($value);
 ?>
 <?php include 'partials/header.php'; ?>
         <div class="row">
