@@ -28,7 +28,7 @@ $value = $db->fetchAll();
                 <td><?= date('d/m/Y', strtotime($v->created_at)); ?></td>
                 <td><img src="../img/<?= $v->name; ?>" alt=""></td>
                 <td>
-                    <a class="btn btn-danger" href="delete.php?id=<?= $v->post_id; ?>">Delete</a>
+                    <a class="btn btn-danger" href="delete.php?id=<?= $v->post_id; ?> onclick="return confirm('En ête vous sûr ?');">Delete</a>
                     <a class="btn btn-info" href="edit.php?title=<?= $v->title; ?>">Edit</a>
                 </td>
                 <?php if ($v->updated_at > 0): ?>

@@ -2,7 +2,7 @@
 //import library
 include 'library/includes.php';
 //request detail
-$db = $pdo->query('SELECT * FROM post WHERE title='.$pdo->quote($_GET['title'], PDO::PARAM_STR));
+$db = $pdo->query('SELECT * FROM post WHERE title='.$pdo->quote($_GET['url'], PDO::PARAM_STR));
 $new = $db->fetch();
 //title page
 $title_page = "Details | ".$new->title;

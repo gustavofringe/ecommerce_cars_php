@@ -5,7 +5,7 @@ $img = $image->fetch();
 unlink('../img/'.$img->name);
 $db = $pdo->prepare('DELETE FROM post WHERE id= ?');
 $db->execute([$_GET['id']]);
-$_SESSION['flash']['danger'] = "Votre post est supprimé";
+setFlash("Votre post est supprimé", 'danger');
 header("Location: admin.php");
 die();
 ?>

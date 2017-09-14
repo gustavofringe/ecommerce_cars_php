@@ -6,7 +6,10 @@ if (!empty($_POST)) {
     if (empty($_POST['title']) || !preg_match('/^[a-zA-Z0-9_]+$/', $_POST['title'])) {
         $errors['title'] = "Vous n'avez pas entrer un titre valide";
     }
-    //preg_match('/^[a-z\-0-9]+$/'
+    if (empty($_POST['url']) || !preg_match('/^[a-z\-0-9]+$/', $_POST['url'])) {
+        $errors['url'] = "Vous n'avez pas entrer un url valide";
+    }
+    //
     if(empty($_POST['content'])){
         $errors['content'] = "Votre contenu est incorrect";
     }
@@ -14,11 +17,12 @@ if (!empty($_POST)) {
         $errors['autor'] = "Vous n'avez pas entrer un auteur valide";
     }
     if(empty($errors)){
-        $title = htmlspecialchars($_POST['title']);
+        $title = $_POST['title'];
         $content = $_POST['content'];
-        $autor = htmlspecialchars($_POST['autor']);
-        $req = $pdo->prepare("INSERT INTO post SET title= ?, content= ?, autor= ?, created_at=NOW()");
-        $req->execute([$title, $content, $autor]);
+        $autor = $_POST['autor'];
+        $url = $_POST['url'];
+        $req = $pdo->prepare("INSERT INTO post SET title= ?, url = ?, content= ?, autor= ?, created_at=NOW()");
+        $req->execute([$title, $url, $content, $autor]);
         $post_id = $pdo->lastInsertId();
         $img = $_FILES['image'];
         $size = $img['size'];
@@ -36,7 +40,7 @@ if (!empty($_POST)) {
         }else{
             $errors['image'] = "l'image n'est pas au bon format";
         }
-        $_SESSION['flash']['success'] = "Votre post est envoyé";
+        setFlash("Votre post est envoyé");
         header('Location: admin.php');
         die();
     }
@@ -63,6 +67,11 @@ include '../partials/header.php';
             <div class="form-group">
                 <label for="title">Title</label>
                 <input type="text" class="form-control" id="title" name="title" aria-describedby="emailHelp"
+                       placeholder="Enter title">
+            </div>
+            <div class="form-group">
+                <label for="url">Url</label>
+                <input type="text" class="form-control" id="url" name="url" aria-describedby="emailHelp"
                        placeholder="Enter title">
             </div>
             <div class="form-group">

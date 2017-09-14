@@ -19,6 +19,14 @@ class Form{
     public function button($class, $value){
         echo "<button class='$class'>$value</button>";
     }
+    public function checkbox(){
+        echo "<div class='form-check'>
+                <label class='form-check-label'>
+                <input type='checkbox' class='form-check-input' name='check' value=1>
+                        En ligne ?
+                </label>
+               </div>";
+    }
     public function close(){
         echo "</form>";
     }
