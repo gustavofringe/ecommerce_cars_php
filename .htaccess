@@ -1,0 +1,5 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    RewriteRule "^detail-(.*)$" "view.php?url=$1"
+</IfModule>
