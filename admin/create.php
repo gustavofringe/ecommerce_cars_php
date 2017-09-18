@@ -24,7 +24,12 @@ if (!empty($_POST)) {
         $req = $pdo->prepare("INSERT INTO post SET title= ?, url = ?, content= ?, autor= ?, created_at=NOW()");
         $req->execute([$title, $url, $content, $autor]);
         $post_id = $pdo->lastInsertId();
+        $autor = htmlspecialchars($_POST['autor']);
+        //$req = $pdo->prepare("INSERT INTO post SET title= ?, content= ?, autor= ?, created_at=NOW()");
+        //$req->execute([$title, $content, $autor]);
+        //$post_id = $pdo->lastInsertId();
         $img = $_FILES['image'];
+        dd($_FILES);
         $size = $img['size'];
         $type = $img['type'];
         $ext = strtolower(substr($img['name'], -3));
@@ -35,8 +40,8 @@ if (!empty($_POST)) {
             $file = '../img/'. $img['name'];
             $resizedFile =  '../img/' . $filename;
             Img::smart_resize_image($file , null, 318 , 180 , false , $resizedFile , false , false ,100 );
-            $img = $pdo->prepare("INSERT INTO image SET name= ?, size= ?, type= ?, post_id= ?");
-            $img->execute([$filename, $size, $type, $post_id]);
+            //$img = $pdo->prepare("INSERT INTO image SET name= ?, size= ?, type= ?, post_id= ?");
+            //$img->execute([$filename, $size, $type, $post_id]);
         }else{
             $errors['image'] = "l'image n'est pas au bon format";
         }

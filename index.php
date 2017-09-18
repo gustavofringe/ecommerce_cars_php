@@ -19,6 +19,7 @@ $value = $db->fetchAll();
                             <h4 class="card-title"><?= $v->title; ?></h4>
                             <p class="card-text">Sold by: <?= $v->autor; ?></p>
                             <a href="view.php?url=<?= $v->url; ?>" class="btn btn-primary">See more</a>
+                            <a href="detail/<?= $v->title; ?>" class="btn btn-primary">See more</a>
                         </div>
                     </div>
                 </div>
