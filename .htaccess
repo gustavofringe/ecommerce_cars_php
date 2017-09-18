@@ -339,7 +339,7 @@ AddDefaultCharset utf-8
     RewriteRule ^ - [env=proto:https]
     RewriteCond %{HTTPS} !=on
     RewriteRule ^ - [env=proto:http]
-
+    RewriteRule	^detail/([a-z]+)$ view.php?title=$1	[L]
 </IfModule>
 
 # ----------------------------------------------------------------------
@@ -526,8 +526,6 @@ AddDefaultCharset utf-8
     RewriteCond %{SCRIPT_FILENAME} -d [OR]
     RewriteCond %{SCRIPT_FILENAME} -f
     RewriteRule "(^|/)\." - [F]
-    Options +FollowSymlinks
-    RewriteRule	^detail/?([0-9]+)$	view.php?title=$1	[L]
 </IfModule>
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
